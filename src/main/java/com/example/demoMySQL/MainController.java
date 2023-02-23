@@ -1,5 +1,6 @@
 package com.example.demoMySQL;
 
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,12 @@ import org.springframework.web.bind.annotation.*;
 public class MainController {
     @Autowired
     private UserRepository userRepository;
+
+    @DeleteMapping(path = "/delete")
+    public @ResponseBody String deleteUser(@RequestParam Integer id){
+        userRepository.deleteById(id);
+        return "Delete";
+    }
 
     @PostMapping(path = "/add")
     public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String email) {
